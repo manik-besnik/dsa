@@ -15,7 +15,7 @@ function isPalimdrome(s) {
     return true;
 }
 
-// console.log(isPalimdrome("ab"));
+console.log(isPalimdrome("ab"));
 
 const removeEle = (arr, num) => {
     let newArr = [];
@@ -46,4 +46,4 @@ const twoSum = (nums, target) => {
     }
 };
 
-twoSum([5, 75, 25], 100);
+// twoSum([5, 75, 25], 100);
