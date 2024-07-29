@@ -125,12 +125,12 @@ class Solution
 
         }
 
-        if ($stack->length === 0){
-            return true;
+        if ($stack->length > 0){
+            return false;
         }
 
 
-        return false;
+        return true;
     }
 }
 
