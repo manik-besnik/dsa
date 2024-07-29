@@ -4,7 +4,7 @@ function isPalimdrome(s) {
     let j = str.length - 1;
 
     while (i <= j) {
-        if (str[i] != str[j]) {
+        if (str[i] !== str[j]) {
             return false;
         }
 
@@ -20,7 +20,7 @@ console.log(isPalimdrome("ab"));
 const removeEle = (arr, num) => {
     let newArr = [];
     for (let i = 0; i < arr.length; i++) {
-        if (arr[i] != num) {
+        if (arr[i] !== num) {
             newArr.push(arr[i]);
         }
     }

@@ -1,5 +1,5 @@
 const trailingZeroes = (n) => {
-    if(n==0) return 0;
+    if(n===0) return 0;
     let fact = BigInt(1);
     for (let i = fact; i <= n; i++) {
         fact*= BigInt(i);
