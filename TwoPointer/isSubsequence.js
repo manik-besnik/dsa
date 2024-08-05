@@ -1,4 +1,4 @@
-const isSubSequece = (s, t) => {
+const isSubSequence = (s, t) => {
     if (!s) {
         return true;
     }
@@ -17,4 +17,4 @@ const isSubSequece = (s, t) => {
     return sp === s.length
 };
 
-console.log(isSubSequece("axc", "ahbgdc"));
+console.log(isSubSequence("axc", "ahbgdc"));
