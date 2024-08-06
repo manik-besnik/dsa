@@ -1,0 +1,45 @@
+<?php
+
+namespace IntegerToRoman;
+
+class Solution
+{
+    /**
+     * @param Integer $num
+     * @return String
+     */
+    function intToRoman(int $num): string
+    {
+        // Array of Roman numerals and their corresponding integer values
+        $values = [
+            1000 => 'M',
+            900 => 'CM',
+            500 => 'D',
+            400 => 'CD',
+            100 => 'C',
+            90 => 'XC',
+            50 => 'L',
+            40 => 'XL',
+            10 => 'X',
+            9 => 'IX',
+            5 => 'V',
+            4 => 'IV',
+            1 => 'I'
+        ];
+
+        // Initialize the result string
+        $result = '';
+
+        // Iterate through each symbol starting from the largest
+        foreach ($values as $value => $symbol) {
+            // Append symbol to result and decrease num accordingly
+            while ($num >= $value) {
+                $result .= $symbol;
+                $num -= $value;
+            }
+        }
+
+        // Return the final Roman numeral representation
+        return $result;
+    }
+}
