@@ -47,10 +47,10 @@ class LinkList extends ListNode
 class Solution
 {
     /**
-     * @param ListNode $head
-     * @return ListNode
+     * @param ListNode|null $head
+     * @return ListNode|null
      */
-    function deleteDuplicates(ListNode $head): ListNode
+    function deleteDuplicates(ListNode|null $head): ListNode|null
     {
         $currentNode = $head;
         $prevNodeValue = $head->val;

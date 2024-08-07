@@ -47,34 +47,52 @@ class LinkList extends ListNode
 class Solution
 {
     /**
-     * @param ListNode $head
-     * @return ListNode
+     * @param ListNode|null $head
+     * @return ListNode|null
      */
-    function deleteDuplicates(ListNode $head): ListNode
+    function deleteDuplicates(ListNode|null $head): ListNode|null
     {
-        $currentNode = $head;
-        $prevNodeValue = $head->val;
+        if (!$head){
+            return  $head;
+        }
+
+        $currentNode = $head->next;
+        $prevNodeVal = $head->val;
+        $currentNodeVal = $head->next?->val;
 
 
         while ($currentNode) {
 
-            if ($currentNode->next && $currentNode->next->val === $prevNodeValue) {
-                $nextNode = $currentNode->next->next;
-                $currentNode->next = $nextNode;
-            } else {
+            if ($currentNodeVal === $prevNodeVal &&
+                ($currentNode->next && $currentNode->next?->val === $prevNodeVal)) {
+
+                $prevNodeVal = $currentNode->val;
+                $currentNodeVal = $currentNode->next?->val;
+                $currentNode = $currentNode->next;
+
+            }elseif ($currentNodeVal === $prevNodeVal &&
+                ($currentNode->next && $currentNode->next?->val !== $prevNodeVal)){
+
+                $prevNodeVal = $currentNode->val;
+                $currentNodeVal = $currentNode->next?->val;
+                $currentNode = $currentNode->next?->next;
+
+            }else {
+
                 $currentNode = $currentNode->next;
             }
 
-            $prevNodeValue = $currentNode->val;
 
         }
 
-        return $head;
+
+        return $currentNode;
     }
 }
 
 
 $l1 = new LinkList();
+$l1->append(1);
 $l1->append(1);
 $l1->append(2);
 $l1->append(2);
@@ -82,6 +100,7 @@ $l1->append(2);
 $l1->append(3);
 $l1->append(3);
 $l1->append(4);
+$l1->append(5);
 
 
 $solution = new Solution();
