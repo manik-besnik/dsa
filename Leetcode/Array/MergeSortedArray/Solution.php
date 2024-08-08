@@ -9,42 +9,44 @@ class Solution
      * @param Integer $m
      * @param Integer[] $nums2
      * @param Integer $n
-     * @return NULL
+     * @return null
      */
-    public function merge(array &$nums1, int $m, array $nums2, int $n)
+    public function merge(array &$nums1, int $m, array $nums2, int $n): null
     {
 
-        $newArr = $nums1;
+        $newNums = $nums1;
         $nums1 = [];
 
         $count = 0;
-        $length = $m + $n;
-        while ($count < $length) {
-            if (isset($newArr[$count]) && isset($nums2[$count])) {
+        $totalLength = $m + $n;
+        $pointer1 = 0;
+        $pointer2 = 0;
 
-                if ($newArr[$count] > 0) {
 
-                    $nums1[] = min($newArr[$count], $nums2[$count]);
+        while ($count < $totalLength) {
+            if ($pointer1 < $m && $pointer2 < $n) {
+                if ($newNums[$pointer1] > $nums2[$pointer2]) {
+                    $nums1[] = $nums2[$pointer2];
+                    $pointer2++;
+
+                } else {
+                    $nums1[] = $newNums[$pointer1];
+                    $pointer1++;
                 }
-
-                $count++;
-
-                print_r($nums1);
-
-            } elseif (isset($newArr[$count])) {
-
-                $nums1[] = $newArr[$count];
-                $count++;
-            } elseif (isset($nums2[$count])) {
-
-                $nums1[] = $nums2[$count];
-                $count++;
+            } elseif ($pointer1 < $m) {
+                $nums1[] = $newNums[$pointer1];
+                $pointer1++;
+            } elseif ($pointer2 < $n) {
+                $nums1[] = $nums2[$pointer2];
+                $pointer2++;
             }
+
+            $count++;
 
 
         }
 
-        return $nums1;
+        return null;
     }
 }
 
@@ -52,4 +54,6 @@ $nums1 = [1, 2, 3, 0, 0, 0];
 $nums2 = [2, 5, 6];
 $solution = new Solution();
 
-print_r($solution->merge($nums1, 3, $nums2, 3));
+$solution->merge($nums1, 3, $nums2, 3);
+
+print_r($nums1);

@@ -11,29 +11,22 @@ class Solution
     public function maxProfit(array $prices): int
     {
         $maxProfit = 0;
+        $minProfit = PHP_INT_MAX;
 
-        $left = 0;
-        $right = 1;
         $length = count($prices);
 
-        while ($right < $length) {
-            if ($prices[$left] > $prices[$right]) {
-                $left++;
-            } else {
-                $profit = $prices[$right] - $prices[$left];
-
-                if ($profit > $maxProfit) {
-                    $maxProfit = $profit;
-                }
+        for ($i = 0; $i < $length; $i++) {
+            if ($prices[$i] < $minProfit) {
+                $minProfit = $prices[$i];
+            } elseif ($prices[$i] - $minProfit > $maxProfit) {
+                $maxProfit = $prices[$i] - $minProfit;
             }
-
-            $right++;
         }
 
         return $maxProfit;
     }
 }
 
-$s= new Solution();
+$s = new Solution();
 
-print_r($s->maxProfit([2,1,2,1,0,1,2]));
+print_r($s->maxProfit([2, 1, 2, 1, 0, 1, 2]));
