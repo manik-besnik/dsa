@@ -13,12 +13,15 @@ class Solution
         $length = count($nums);
 
         $jump = 0;
+        $current = 0;
+        $farthest = 0;
 
         for ($i = 0; $i < $length - 1; $i++) {
 
-            $toJump = ($length - $i) - 1;
+            $farthest = max($farthest, $nums[$i] + $i);
 
-            if ($nums[$i] >= $toJump) {
+            if ($i === $current) {
+                $current = $farthest;
                 $jump++;
             }
 
@@ -31,4 +34,6 @@ class Solution
 
 $s = new Solution();
 
-var_dump($s->jump([2,3,1,1,4]));
+var_dump($s->jump([2, 3, 1, 1, 4]));
+
+var_dump($s->jump([1, 2, 3]));

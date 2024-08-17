@@ -1,12 +1,13 @@
 <?php
-
+namespace TrappingRainWater;
 class Solution {
 
     /**
      * @param Integer[] $height
      * @return Integer
      */
-    function trap($height) {
+    function trap(array $height): int
+    {
         $trappedWater = 0;
 
         $length = count($height);
