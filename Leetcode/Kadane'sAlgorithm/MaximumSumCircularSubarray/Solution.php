@@ -10,34 +10,34 @@ class Solution
     function maxSubarraySumCircular(array $nums): int
     {
 
-        $maxSum = $nums[0];
-        $sum = 0;
         $length = count($nums);
-        $lastPointer = 0;
+        $maxStraightSum = PHP_INT_MIN;
+        $minStraightSum = PHP_INT_MAX;
+        $tempMaxSum = 0;
+        $tempMinSum = 0;
+        $arraySum = 0;
 
-        for ($i = 0; $i <= $length; $i++) {
+        for ($i = 0; $i < $length; $i++) {
+            $arraySum += $nums[$i];
 
-            if ($i === $length && $lastPointer === $i) {
-
-                $sum += $nums[0];
-            } else {
-
-                $sum += $nums[$i];
+            $tempMaxSum += $nums[$i];
+            $maxStraightSum = max($maxStraightSum, $tempMaxSum);
+            if ($tempMaxSum < 0) {
+                $tempMaxSum = 0;
             }
 
-
-            if ($sum > $maxSum) {
-                $maxSum = $sum;
-                $lastPointer = $i;
-            }
-
-            if ($sum < 0) {
-                $sum = 0;
+            $tempMinSum += $nums[$i];
+            $minStraightSum = min($minStraightSum, $tempMinSum);
+            if ($tempMinSum > 0) {
+                $tempMinSum = 0;
             }
         }
 
+        if ($arraySum == $minStraightSum) {
+            return $maxStraightSum;
+        }
 
-        return $maxSum;
+        return max($maxStraightSum, $arraySum - $minStraightSum);
     }
 }
 

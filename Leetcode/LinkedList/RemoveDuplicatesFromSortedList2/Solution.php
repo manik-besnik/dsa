@@ -50,43 +50,32 @@ class Solution
      * @param ListNode|null $head
      * @return ListNode|null
      */
-    function deleteDuplicates(ListNode|null $head): ListNode|null
+    public function deleteDuplicates(ListNode|null $head): ListNode|null
     {
-        if (!$head){
-            return  $head;
+        if (!$head && !$head->next) {
+            return $head;
         }
 
-        $currentNode = $head->next;
-        $prevNodeVal = $head->val;
-        $currentNodeVal = $head->next?->val;
+        $duplicate = new ListNode();
+        $duplicate->next = $head;
+        $result = $current = $duplicate;
+        $current = $current->next;
 
+        while ($current->next){
+            if ($current->val === $current->next->val){
+                while ($current->val === $current->next->val){
+                    $current = $current->next;
+                }
 
-        while ($currentNode) {
-
-            if ($currentNodeVal === $prevNodeVal &&
-                ($currentNode->next && $currentNode->next?->val === $prevNodeVal)) {
-
-                $prevNodeVal = $currentNode->val;
-                $currentNodeVal = $currentNode->next?->val;
-                $currentNode = $currentNode->next;
-
-            }elseif ($currentNodeVal === $prevNodeVal &&
-                ($currentNode->next && $currentNode->next?->val !== $prevNodeVal)){
-
-                $prevNodeVal = $currentNode->val;
-                $currentNodeVal = $currentNode->next?->val;
-                $currentNode = $currentNode->next?->next;
-
-            }else {
-
-                $currentNode = $currentNode->next;
+                $duplicate ->next = $current->next;
+                $current = $current->next;
+            }else{
+                $current = $current->next;
+                $duplicate = $duplicate->next;
             }
-
-
         }
 
-
-        return $currentNode;
+        return $result->next;
     }
 }
 
@@ -97,6 +86,9 @@ $l1->append(1);
 $l1->append(2);
 $l1->append(2);
 $l1->append(2);
+$l1->append(3);
+$l1->append(3);
+$l1->append(3);
 $l1->append(3);
 $l1->append(3);
 $l1->append(4);
