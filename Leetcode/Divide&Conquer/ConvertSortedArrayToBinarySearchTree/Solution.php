@@ -19,67 +19,26 @@ class Solution
 {
     /**
      * @param Integer[] $nums
-     * @return TreeNode
+     * @return TreeNode|null
      */
-    function sortedArrayToBST(array $nums): TreeNode
+    function sortedArrayToBST(array|null $nums): TreeNode|null
     {
 
+        if($nums == null) { return null; }
         $length = count($nums);
 
-        $middlePoint = ($length / 2);
-
-        if ($length % 2 === 1) {
-            $middlePoint = floor($length / 2);
-        }
-
-        $head = new TreeNode($nums[$middlePoint]);
-
-        $count = 0;
-
-        while ($count < $middlePoint){
-            $this->insert($head,$nums[$count]);
-            $count++;
-        }
-
-        $count = $middlePoint +1;
-
-        while ($count < $length){
-            $this->insert($head,$nums[$count]);
-            $count++;
-        }
+        $middlePoint = (int) ($length / 2);
 
 
-        return $head;
 
-    }
+        $treeNode = new TreeNode($nums[$middlePoint]);
 
-    private function insert(TreeNode $root,int $value): void
-    {
-        $node = new TreeNode($value);
+        $treeNode->left = $this->sortedArrayToBST(array_slice($nums,0 ,$middlePoint));
 
-        $currentNode = $root;
+        $treeNode->right = $this->sortedArrayToBST(array_slice($nums,$middlePoint + 1));
 
-        while (true) {
-            if ($currentNode->val > $value) {
 
-                if ($currentNode->left) {
-                    $currentNode = $currentNode->left;
-                } else {
-                    $currentNode->left = $node;
-                    return;
-                }
-
-            }
-            if ($currentNode->val < $value) {
-                if ($currentNode->right) {
-                    $currentNode = $currentNode->right;
-                } else {
-                    $currentNode->right = $node;
-                    return;
-                }
-            }
-        }
-
+        return $treeNode;
 
     }
 }
