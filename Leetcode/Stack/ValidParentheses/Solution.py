@@ -12,10 +12,9 @@ class Solution:
                     return False
                 else:
                     pop = stack.pop()
-                    if (pop == '(' and str == ')') or  (pop == '{' and str == '}') or  (pop == '[' and str == ']'):
-                        continue
-                    else: 
+                    if (pop == '(' and str != ')') or  (pop == '{' and str != '}') or  (pop == '[' and str != ']'):
                         return False
+
 
         if len(stack) == 0:
             return True
