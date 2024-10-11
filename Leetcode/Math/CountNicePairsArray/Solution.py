@@ -2,16 +2,33 @@ from typing import List
 class Solution:
     def countNicePairs(self, nums: List[int]) -> int:
         nice_pairs = 0
+        reverse_nums = {}
+        n = len(nums)
+# [10,13,24,35,76]
+# [76,35,24,13,10]
+        for i in range(n):
+            reverse_nums[nums[i]] = int(str(nums[i])[::-1])
 
-        for i in range(len(nums) - 1):
+        for i in range(n - 1):
+            num = nums[i]
+            reverse_num = reverse_nums[nums[i]]
 
-            num_i = str(nums[i])[::-1]
-            num_j = str(nums[i + 1])[::-1]
+            for j in range(i+1, n):
 
-            if nums[i] + int(num_j) == nums[i + 1] + int(num_i):
-                nice_pairs +=1
 
+                
+                print("number second",nums[j] + reverse_num)
+                print("reverse number second",(num + reverse_nums[nums[j]]))
+                
+                if (nums[j] + reverse_num) == (num + reverse_nums[nums[j]]):
+                    nice_pairs +=1
+
+            
+                if i == 3: return nice_pairs
         return nice_pairs
+            
+
+        
     
 obj = Solution()
 
