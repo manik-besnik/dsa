@@ -12,6 +12,7 @@ class Solution:
                 deque_indices.popleft()
 
             while deque_indices and nums[deque_indices[-1]] < nums[i]:
+
                 deque_indices.pop()
 
             deque_indices.append(i)

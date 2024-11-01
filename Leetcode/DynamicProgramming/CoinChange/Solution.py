@@ -5,33 +5,23 @@ class Solution:
 
         coins.sort() 
         
-        if len(coins) == 1 and coins[0] == amount:
+        dp = [0] * (amount + 1)
 
-            return 1
-        
-        if amount == 0:
-            return 0
+        for i in range(1, amount + 1):
+            min_val = float('inf')
 
-        requiredAmount = amount
-        coinCount = 0
+            for coin in coins:
+                diff = i - coin
 
+                if diff < 0:
+                    break
+                min_val = min(min_val, dp[diff] + 1)
 
-        i = len(coins) - 1
-
-        while  i >= 0:
-
-            if requiredAmount > coins[i]:
-                requiredAmount -= coins[i]
-                coinCount += 1
-
-                continue
-   
-            elif requiredAmount == coins[i]:
-                return coinCount + 1
-            i -= 1
-
-        
-        return -1
+            dp[i] = min_val
+        if(dp[amount] < float('inf')):
+            return dp[amount]
+        else:
+            return - 1
         
 
 s = Solution()
