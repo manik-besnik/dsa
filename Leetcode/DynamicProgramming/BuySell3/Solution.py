@@ -2,15 +2,24 @@ from typing import List
 
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-        if len(prices)<2:
-            return 0
-        fb = float('inf')
-        sb = float('inf')
-        fs = 0
-        ss = 0
+        min_first_buy = float('inf')
+        max_first_profit = 0
+        min_second_buy = float('inf')
+        max_second_profit = 0
+
         for price in prices:
-            fb=min(fb,price)
-            fs=max(fs,price-fb)
-            sb=min(sb,price-fs)
-            ss=max(ss,price-sb)
-        return ss
+            if price < min_first_buy:
+                min_first_buy = price
+            
+            if price - min_first_buy > max_first_profit:
+                max_first_profit = price - min_first_buy
+
+            if price - max_first_profit < min_second_buy:
+                min_second_buy = price - max_first_profit
+
+            if price - min_second_buy > max_second_profit:
+                max_second_profit = price - min_second_buy
+
+        return max_second_profit
+
+        
